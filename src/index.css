@@ -220,10 +220,10 @@ h1 {
   position: relative;
   width: 100vw;
   margin-left: calc(-5vw);   /* break out of hero padding */
-  height: 190px;
+  height: 110px;
   overflow: hidden;
-  margin-top: 1.6rem;
-  margin-bottom: 1.6rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .hero-visual {
