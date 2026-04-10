@@ -1,8 +1,17 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { WebGLShader } from '@/components/ui/web-gl-shader'
 
 export default function Hero() {
   const gridRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => {
@@ -38,7 +47,7 @@ export default function Hero() {
 
   return (
     <section id="hero">
-      <WebGLShader />
+      {!isMobile && <WebGLShader />}
 
       <div className="hero-grid" ref={gridRef} />
       <div className="particles" id="particles" />
@@ -53,6 +62,13 @@ export default function Hero() {
           Абріс Рей встановлює сонячні електростанції для будинків і бізнесу з{' '}
           <strong>2016 року</strong>. Індивідуальні рішення, сертифіковане обладнання, повна підтримка.
         </p>
+
+        {isMobile && (
+          <div className="hero-webgl-mobile">
+            <WebGLShader className="block w-full h-full" />
+          </div>
+        )}
+
         <div className="hero-btns">
           <a className="btn btn-grad" href="#contact">Безкоштовна консультація</a>
           <a className="btn btn-ghost" href="#services">Наші послуги</a>

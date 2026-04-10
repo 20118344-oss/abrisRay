@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Menu, X } from 'lucide-react'
 
 const LogoSvg = () => (
   <svg viewBox="0 0 34 34" fill="none">
@@ -22,6 +23,14 @@ const LogoSvg = () => (
   </svg>
 )
 
+const navItems = [
+  { href: '#about', label: 'Про нас' },
+  { href: '#services', label: 'Послуги' },
+  { href: '#equipment', label: 'Обладнання' },
+  { href: '#process', label: 'Як ми працюємо' },
+  { href: '#contact', label: 'Контакти' },
+]
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -43,25 +52,77 @@ export default function Header() {
     document.body.style.overflow = next ? 'hidden' : ''
   }
 
+  const handleNavClick = (href: string) => {
+    closeMenu()
+    setTimeout(() => {
+      const el = document.querySelector(href)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }, 300)
+  }
+
   return (
-    <header id="nav" className={scrolled ? 'scrolled' : ''}>
-      <a className="logo" href="#hero">
-        <LogoSvg />
-        Абріс<em>Рей</em>
-      </a>
-      <nav>
-        <ul id="nav-menu" className={menuOpen ? 'open' : ''}>
-          <li><a href="#about" onClick={closeMenu}>Про нас</a></li>
-          <li><a href="#services" onClick={closeMenu}>Послуги</a></li>
-          <li><a href="#equipment" onClick={closeMenu}>Обладнання</a></li>
-          <li><a href="#process" onClick={closeMenu}>Як ми працюємо</a></li>
-          <li><a href="#contact" onClick={closeMenu}>Контакти</a></li>
-        </ul>
-      </nav>
-      <a className="nav-cta" href="#contact">Отримати консультацію</a>
-      <button className="burger" onClick={toggleMenu} aria-label="Меню">
-        <span /><span /><span />
-      </button>
-    </header>
+    <>
+      <header id="nav" className={scrolled ? 'scrolled' : ''}>
+        <a className="logo" href="#hero">
+          <LogoSvg />
+          Абріс<em>Рей</em>
+        </a>
+
+        {/* Desktop nav */}
+        <nav className="desktop-nav">
+          <ul>
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Desktop CTA — hidden on mobile via CSS */}
+        <a className="nav-cta" href="#contact">Отримати консультацію</a>
+
+        {/* Burger button */}
+        <button className="burger" onClick={toggleMenu} aria-label="Меню">
+          <Menu className="w-6 h-6" style={{ color: 'var(--text)' }} />
+        </button>
+      </header>
+
+      {/* Full-screen mobile overlay */}
+      <div
+        className={`mobile-menu-overlay ${menuOpen ? 'mobile-menu-overlay--open' : ''}`}
+        aria-hidden={!menuOpen}
+      >
+        {/* Close button */}
+        <button className="mobile-menu-close" onClick={closeMenu} aria-label="Закрити меню">
+          <X className="w-6 h-6" style={{ color: 'var(--text)' }} />
+        </button>
+
+        {/* Nav items */}
+        <nav className="mobile-menu-nav">
+          {navItems.map((item, i) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="mobile-menu-link"
+              style={{ transitionDelay: menuOpen ? `${i * 60}ms` : '0ms' }}
+              onClick={() => handleNavClick(item.href)}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* CTA inside menu */}
+        <a
+          className="mobile-menu-cta"
+          href="#contact"
+          style={{ transitionDelay: menuOpen ? `${navItems.length * 60}ms` : '0ms' }}
+          onClick={() => handleNavClick('#contact')}
+        >
+          Отримати консультацію
+        </a>
+      </div>
+    </>
   )
 }
