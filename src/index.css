@@ -215,14 +215,15 @@ h1 {
   .hstat-num { font-size: 2rem; }
   .hstat-label { font-size: .72rem; }
 }
-/* WebGL block visible only on mobile (inside hero-inner flow) */
+/* WebGL strip on mobile — edge-to-edge, no card look */
 .hero-webgl-mobile {
   position: relative;
-  width: 100%;
-  height: 180px;
-  border-radius: 12px;
+  width: 100vw;
+  margin-left: calc(-5vw);   /* break out of hero padding */
+  height: 110px;
   overflow: hidden;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .hero-visual {
@@ -707,6 +708,10 @@ footer {
   .form-grid { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .process-track::before { left: 27px; }
+  /* Compact hero on mobile so content fits above the fold */
+  #hero { padding-top: 5.5rem; padding-bottom: 3rem; }
+  h1 { margin-bottom: 0.9rem; }
+  .hero-sub { margin-bottom: 0; font-size: 1rem; }
 }
 @media (max-width: 860px) {
   .tl-top-row { gap: 2rem; }

@@ -77,15 +77,17 @@ export function WebGLShader({ className }: { className?: string }) {
         g = mix(g, 1.0, bloom);
         b = mix(b, 1.0, bloom);
 
-        gl_FragColor = vec4(r, g, b, 1.0);
+        // Transparent background — only the beam is visible
+        float alpha = clamp(intensity * 4.0, 0.0, 1.0);
+        gl_FragColor = vec4(r, g, b, alpha);
       }
     `
 
     const initScene = () => {
       refs.scene = new THREE.Scene()
-      refs.renderer = new THREE.WebGLRenderer({ canvas })
+      refs.renderer = new THREE.WebGLRenderer({ canvas, alpha: true })
       refs.renderer.setPixelRatio(window.devicePixelRatio)
-      refs.renderer.setClearColor(new THREE.Color(0x000000))
+      refs.renderer.setClearColor(new THREE.Color(0x090c11), 0)
 
       refs.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, -1)
 
