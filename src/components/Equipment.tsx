@@ -73,13 +73,13 @@ export default function Equipment() {
         <div className="price-callout" data-reveal>
           <div>
             <div className="price-big">
-              від $0.89<span style={{ fontSize: '1.4rem' }}>/Вт</span>
+              від $0.6<span style={{ fontSize: '1.4rem' }}>/Вт</span>
             </div>
             <div className="price-label">Сонячна станція під ключ</div>
           </div>
           <div className="price-note">
-            Вартість залежить від складності проєкту та встановленої потужності.<br />
-            Отримайте точний розрахунок безкоштовно - залиште заявку нижче.
+            Від 0.6 дол/ватт. Чим більша встановлена потужність АКБ,<br />
+            тим менша відносна вартість вашого проекту/менший термін окупності
           </div>
         </div>
       </div>

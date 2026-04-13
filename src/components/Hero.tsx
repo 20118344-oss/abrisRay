@@ -87,7 +87,7 @@ export default function Hero() {
             <div className="hstat-label">Рік заснування</div>
           </div>
           <div className="hstat">
-            <div className="hstat-num">від $0.89</div>
+            <div className="hstat-num">від $0.6</div>
             <div className="hstat-label">За ват<br />під ключ</div>
           </div>
         </div>
