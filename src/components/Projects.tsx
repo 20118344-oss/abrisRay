@@ -21,8 +21,8 @@ function useReveal(ref: React.RefObject<Element | null>) {
 const topProjects = [
   {
     img: '/pictures/ab1.png',
-    title: 'Приватна станція 10 кВт',
-    desc: 'Житловий будинок, Київська обл.',
+    title: 'Приватна гібридна станція 20 кВт',
+    desc: 'м. Кременчук, Полтавська область',
   },
   {
     img: '/pictures/ab2.jpg',
